@@ -1,0 +1,14 @@
+{
+  "name": "project_annex",
+  "version": "1.0.0",
+  "description": "Admission data analysis ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Mir Sahib",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
