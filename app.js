@@ -2,6 +2,19 @@ const express = require("express");
 const app = express();
 const path = require("path");
 var bodyParser = require("body-parser");
+var mongoose = require("mongoose");
+
+//database setting
+var db_url =
+  "mongodb+srv://mirsahib24:admin123@test-ry7bt.mongodb.net/Annex?retryWrites=true&w=majority";
+
+mongoose.set("useUnifiedTopology", true);
+mongoose.connect(db_url, { useNewUrlParser: true });
+
+mongoose.connection.on("error", function(err) {
+  console.log(err);
+  console.log("Could not connect to mongodb");
+});
 
 //view engine
 app.set("view engine", "ejs");
