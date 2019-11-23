@@ -10,6 +10,7 @@
   "author": "Mir Sahib",
   "license": "MIT",
   "dependencies": {
+    "bower": "^1.8.8",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
     "mongodb": "^3.3.4",

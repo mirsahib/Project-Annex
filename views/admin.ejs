@@ -92,24 +92,33 @@
               <div class="row">
                 <div class="col-sm">
                   <label for="exampleFormControlSelect1">Year</label>
-                  <select class="form-control" id="exampleFormControlSelect1">
+                  <select class="form-control" id="yearSelect">
+                    <option value="null" disabled selected>Select Year</option>
                     <option>2019</option>
                     <option>2018</option>
                     <option>2017</option>
+                    <option>2016</option>
                   </select>
                 </div>
                 <div class="col-sm">
                   <label for="exampleFormControlSelect1">Semester Name</label>
-                  <select class="form-control" id="exampleFormControlSelect1">
-                    <option>Autumn(Fall)</option>
+                  <select class="form-control" id="semesterSelect">
+                    <option value="null" disabled selected
+                      >Select Semester</option
+                    >
+                    <option>Autumn</option>
                     <option>Spring</option>
                     <option>Summer</option>
                   </select>
                 </div>
+                <!--<button type="submit"> will refresh the page
+                <button type="button"> won't refresh the page
+                -->
                 <div class="col-sm">
                   <button
+                    id="yearSubmit"
                     style="margin-top: 30px;"
-                    type="submit"
+                    type="button"
                     class="btn btn-primary"
                   >
                     Submit
@@ -118,6 +127,9 @@
               </div>
             </div>
           </form>
+          <div class="pie-chart-container">
+            <canvas id="yearChart"></canvas>
+          </div>
 
           <!--School wise distribution-->
           <div class="mb-3 border-bottom">
@@ -127,9 +139,20 @@
             <div class="container">
               <div class="row">
                 <div class="col-sm">
+                  <label for="exampleFormControlSelect1">School Name</label>
+                  <select class="form-control" id="schoolName">
+                    <option disabled selected>Select School Name</option>
+                    <!--
+                    <option>Autumn(Fall)</option>
+                    <option>Spring</option>
+                    <option>Summer</option>
+                    -->
+                  </select>
+                </div>
+                <div class="col-sm">
                   <label for="exampleFormControlSelect1">Year Span</label>
-                  <select class="form-control" id="exampleFormControlSelect1">
-                    <option>Current Year</option>
+                  <select class="form-control" id="yearSpan">
+                    <option disabled selected>Select Year Span</option>
                     <option>Last 1 year</option>
                     <option>Last 2 year</option>
                     <option>Last 3 year</option>
@@ -138,7 +161,7 @@
                 <div class="col-sm">
                   <button
                     style="margin-top: 30px;"
-                    type="submit"
+                    type="button"
                     class="btn btn-primary"
                   >
                     Submit
@@ -155,9 +178,20 @@
             <div class="container">
               <div class="row">
                 <div class="col-sm">
+                  <label for="exampleFormControlSelect1">Major Name</label>
+                  <select class="form-control" id="majorName">
+                    <option disabled selected>Select Major</option>
+                    <!--
+                    <option>Autumn(Fall)</option>
+                    <option>Spring</option>
+                    <option>Summer</option>
+                    -->
+                  </select>
+                </div>
+                <div class="col-sm">
                   <label for="exampleFormControlSelect1">Year Span</label>
                   <select class="form-control" id="exampleFormControlSelect1">
-                    <option>Current Year</option>
+                    <option disabled selected>Select Year Span</option>
                     <option>Last 1 year</option>
                     <option>Last 2 year</option>
                     <option>Last 3 year</option>
@@ -187,17 +221,6 @@
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
       crossorigin="anonymous"
     ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script>
-      window.jQuery ||
-        document.write(
-          '<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>'
-        );
-    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <!-- Icons -->
@@ -208,46 +231,7 @@
 
     <!-- Graphs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-    <script>
-      var ctx = document.getElementById("myChart");
-      var myChart = new Chart(ctx, {
-        type: "line",
-        data: {
-          labels: [
-            "Sunday",
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday"
-          ],
-          datasets: [
-            {
-              data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-              lineTension: 0,
-              backgroundColor: "transparent",
-              borderColor: "#007bff",
-              borderWidth: 4,
-              pointBackgroundColor: "#007bff"
-            }
-          ]
-        },
-        options: {
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  beginAtZero: false
-                }
-              }
-            ]
-          },
-          legend: {
-            display: false
-          }
-        }
-      });
-    </script>
+    <!--my script-->
+    <script type="text/javascript" src="js/admin.js"></script>
   </body>
 </html>
