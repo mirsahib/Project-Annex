@@ -7,6 +7,10 @@ var span = {
   "Last 2 Year": [2019, 2018, 2017],
   "Last 3 Year": [2019, 2018, 2017, 2018]
 };
+//initializing chart (global)
+var majorChart;
+var yearChart;
+var schoolChart;
 $(document).ready(function() {
   schoolName = getSchoolName();
   //majorName = getMajorName();
@@ -52,6 +56,48 @@ $(document).ready(function() {
     } else {
       generateMajorGraph(span[majorYearSpan], major_name);
     }
+  });
+  //generate report event
+  $("#generateReport").click(function() {
+    // get size of report page
+    var reportPageHeight = 2000;
+    var reportPageWidth = window.innerWidth;
+
+    // create a new canvas object that we will populate with all other canvas objects
+    var pdfCanvas = $("<canvas />").attr({
+      id: "canvaspdf",
+      width: reportPageWidth,
+      height: reportPageHeight
+    });
+
+    // keep track canvas position
+    var pdfctx = $(pdfCanvas)[0].getContext("2d");
+    var pdfctxX = 0;
+    var pdfctxY = 0;
+    var buffer = 100;
+
+    // for each chart.js chart
+    $("canvas").each(function(index) {
+      // get the chart height/width
+      var canvasHeight = $(this).innerHeight();
+      var canvasWidth = $(this).innerWidth();
+      // draw the chart into the new canvas
+      pdfctx.drawImage($(this)[0], pdfctxX, pdfctxY, canvasWidth, canvasHeight);
+      pdfctxY += canvasHeight;
+
+      // our report page is in a grid pattern so replicate that in the new canvas
+      //if (index % 2 === 1) {
+      //  pdfctxX = 0;
+      // pdfctxY += canvasHeight + buffer;
+      //}
+    });
+
+    // create new pdf and add our new canvas as an image
+    var pdf = new jsPDF("l", "pt", [reportPageWidth, reportPageHeight]);
+    pdf.addImage($(pdfCanvas)[0], "PNG", reportPageWidth / 2, 0);
+
+    // download the pdf
+    pdf.save("filename.pdf");
   });
 });
 function getSchoolName() {
@@ -208,7 +254,7 @@ function showYearChart(data, label, chartType, legend) {
     }
   };
   //create Chart class object
-  var chart1 = new Chart(ctx1, {
+  yearChart = new Chart(ctx1, {
     type: chartType,
     data: data1,
     options: options
@@ -262,7 +308,7 @@ function showSchoolChart(yearList, data) {
     }
   };
   //create Chart class object
-  var chart1 = new Chart(ctx1, {
+  schoolChart = new Chart(ctx1, {
     type: "bar",
     data: data1,
     options: options
@@ -378,7 +424,7 @@ function showMajorChart(year, data, name) {
     }
   };
   //create Chart class object
-  var chart1 = new Chart(ctx1, {
+  majorChart = new Chart(ctx1, {
     type: "bar",
     data: data1,
     options: options

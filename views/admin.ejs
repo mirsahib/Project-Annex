@@ -130,10 +130,6 @@
           <div class="pie-chart-container">
             <canvas id="yearChart"></canvas>
           </div>
-          <div class="form-group">
-            <label for="comment">Comment:</label>
-            <textarea class="form-control" rows="5" id="yearComment"></textarea>
-          </div>
 
           <!--School wise distribution-->
           <div class="mb-3 border-bottom">
@@ -177,14 +173,6 @@
           </form>
           <div class="pie-chart-container">
             <canvas id="SchoolChart"></canvas>
-          </div>
-          <div class="form-group">
-            <label for="comment">Comment:</label>
-            <textarea
-              class="form-control"
-              rows="5"
-              id="schoolComment"
-            ></textarea>
           </div>
 
           <!--Major Wise distribution-->
@@ -231,19 +219,19 @@
             <canvas id="majorChart"></canvas>
           </div>
           <div class="form-group">
-            <label for="comment">Comment:</label>
+            <!--<label for="comment">Comment:</label>
             <textarea
               class="form-control"
               rows="5"
               id="majorComment"
-            ></textarea>
+            ></textarea>-->
             <button
               style="margin-top: 30px;"
               id="generateReport"
               type="button"
               class="btn btn-primary"
             >
-              Submit
+              Generate Report
             </button>
           </div>
         </main>
@@ -265,6 +253,7 @@
     <script>
       feather.replace();
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
 
     <!-- Graphs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
