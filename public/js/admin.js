@@ -1,20 +1,22 @@
 var data = JSON.parse(localStorage.getItem("admission"));
 var dataLength = data.length;
 var schoolName;
-var majorName;
+//var majorName;
+var span = {
+  "Last 1 Year": [2019, 2018],
+  "Last 2 Year": [2019, 2018, 2017],
+  "Last 3 Year": [2019, 2018, 2017, 2018]
+};
 $(document).ready(function() {
   schoolName = getSchoolName();
-  majorName = getMajorName();
+  //majorName = getMajorName();
   //populate school name
   for (var i = 0; i < schoolName.length; i++) {
     $("#schoolName").append(
       '<option value="' + schoolName[i] + '">' + schoolName[i] + "</option>"
     );
-  }
-  //populate major name
-  for (var i = 0; i < majorName.length; i++) {
     $("#majorName").append(
-      '<option value="' + majorName[i] + '">' + majorName[i] + "</option>"
+      '<option value="' + schoolName[i] + '">' + schoolName[i] + "</option>"
     );
   }
 
@@ -30,7 +32,27 @@ $(document).ready(function() {
     }
   });
 
-  //Semesterwise ditribution event
+  //Schoolwise distribution event
+  $("#schoolSubmit").click(function() {
+    var school_name = $("#schoolName option:selected").text();
+    var yearSpan = $("#yearSpan option:selected").text();
+
+    if (school_name == "Select School Name" || yearSpan == "Select Year Span") {
+      alert("Please select a valid year or semester");
+    } else {
+      generateSchoolGraph(span[yearSpan], school_name);
+    }
+  });
+  //Majorwise distribution event
+  $("#majorSubmit").click(function() {
+    var major_name = $("#majorName option:selected").text();
+    var majorYearSpan = $("#majorYearSpan option:selected").text();
+    if (major_name == "Select School Name" || yearSpan == "Select Year Span") {
+      alert("Please select a valid year or semester");
+    } else {
+      generateMajorGraph(span[majorYearSpan], major_name);
+    }
+  });
 });
 function getSchoolName() {
   var container = [];
@@ -42,6 +64,7 @@ function getSchoolName() {
   container = container.filter((item, i, ar) => ar.indexOf(item) === i);
   return container;
 }
+//don't this function
 function getMajorName() {
   var container = [];
   for (let i = 0; i < dataLength; i++) {
@@ -51,7 +74,7 @@ function getMajorName() {
   }
   container = container.filter((item, i, ar) => ar.indexOf(item) === i);
   return container;
-}
+} //this function is irrelevant to the project
 
 function generateYearGraph(year, semester) {
   //console.log("generate graph");
@@ -65,39 +88,102 @@ function generateYearGraph(year, semester) {
     }
   }
   var result = yearDistribution(container);
-  showChart(result);
+  showYearChart(result, schoolName, "pie", "% of Student"); //showChart(result,label,chartType,chartLegend)
 }
+
 function yearDistribution(data) {
   var array = Array.from(Array(schoolName.length), () => 0);
+  var totalStudent = 0;
   for (let i = 0; i < schoolName.length; i++) {
     for (let j = 0; j < data.length; j++) {
       if (schoolName[i] == data[j].School) {
         array[i] += data[j].Students;
+        totalStudent += data[j].Students;
       }
     }
   }
+  for (var i = 0; i < schoolName.length; i++) {
+    array[i] = ((array[i] / totalStudent) * 100).toFixed(2);
+  }
+
   return array;
 }
+function generateSchoolGraph(yearList, name) {
+  var container = [];
+  for (let i = 0; i < yearList.length; i++) {
+    var yearContainer = [];
+    for (let j = 0; j < dataLength; j++) {
+      if (data[j].Year == yearList[i] && data[j].School == name) {
+        yearContainer.push(data[j]);
+      }
+    }
+    container.push(yearContainer);
+  }
+  var result = semesterDistribution(container);
+  showSchoolChart(yearList, result);
+}
 
-function showChart(data) {
-  //get the pie chart canvas
+function semesterDistribution(yearList) {
+  var yearSemDist = [];
+
+  for (var i = 0; i < yearList.length; i++) {
+    var semContainer = { Autumn: 0, Spring: 0, Summer: 0 };
+    var totalStudent = 0;
+    //year span
+    for (var j = 0; j < yearList[i].length; j++) {
+      //object in a year
+      semesterName = yearList[i][j].Semester;
+      semesterName = semesterName.split(" ");
+      semesterName.pop();
+      totalStudent += yearList[i][j].Students;
+      if (semesterName == "Autumn") {
+        semContainer["Autumn"] += yearList[i][j].Students;
+      } else if (semesterName == "Spring") {
+        semContainer["Spring"] += yearList[i][j].Students;
+      } else {
+        semContainer["Summer"] += yearList[i][j].Students;
+      }
+    }
+    semContainer["Autumn"] = (
+      (semContainer["Autumn"] / totalStudent) *
+      100
+    ).toFixed(2);
+    semContainer["Spring"] = (
+      (semContainer["Spring"] / totalStudent) *
+      100
+    ).toFixed(2);
+    semContainer["Summer"] = (
+      (semContainer["Summer"] / totalStudent) *
+      100
+    ).toFixed(2);
+    yearSemDist.push(semContainer);
+  }
+  return yearSemDist;
+}
+
+function showYearChart(data, label, chartType, legend) {
+  //get the chart canvas
   var ctx1 = $("#yearChart");
+  //generate random color
+  var colorList = [];
+  for (let i = 0; i < data.length; i++) {
+    colorList.push(
+      "#" +
+        Math.random()
+          .toString(16)
+          .substr(-6)
+    );
+  }
 
   //pie chart data
   var data1 = {
-    labels: schoolName,
+    labels: label,
     datasets: [
       {
-        label: "Year Wise Student No",
+        label: "Year Wise Student %",
         data: data,
-        backgroundColor: [
-          "#DEB887",
-          "#A9A9A9",
-          "#DC143C",
-          "#F4A460",
-          "#2E8B57"
-        ],
-        borderColor: ["#CDA776", "#989898", "#CB252B", "#E39371", "#1D7A46"],
+        backgroundColor: colorList,
+        borderColor: colorList,
         borderWidth: [1, 1, 1, 1, 1]
       }
     ]
@@ -108,7 +194,61 @@ function showChart(data) {
     title: {
       display: true,
       position: "top",
-      text: "No of Student",
+      text: legend,
+      fontSize: 18,
+      fontColor: "#111"
+    },
+    legend: {
+      display: true,
+      position: "bottom",
+      labels: {
+        fontColor: "#333",
+        fontSize: 16
+      }
+    }
+  };
+  //create Chart class object
+  var chart1 = new Chart(ctx1, {
+    type: chartType,
+    data: data1,
+    options: options
+  });
+}
+
+function showSchoolChart(yearList, data) {
+  var ctx1 = $("#SchoolChart");
+
+  // catagorize data by semseter
+  data = stripData(data);
+  container = [];
+  labelArr = ["Autumn", "Spring", "Summer"];
+  for (var i = 0; i < data.length; i++) {
+    color =
+      "#" +
+      Math.random()
+        .toString(16)
+        .substr(-6); //generate random color
+    dataset = {};
+    dataset.label = labelArr[i];
+    dataset.data = data[i];
+    dataset.backgroundColor = color;
+    dataset.borderColor = color;
+    dataset.borderWidth = [1, 1, 1, 1, 1];
+    container.push(dataset);
+  }
+
+  //pie chart data
+  var data1 = {
+    labels: yearList,
+    datasets: container
+  };
+  //options
+  var options = {
+    responsive: true,
+    title: {
+      display: true,
+      position: "top",
+      text: "% of Student",
       fontSize: 18,
       fontColor: "#111"
     },
@@ -127,4 +267,135 @@ function showChart(data) {
     data: data1,
     options: options
   });
+}
+
+function stripData(data) {
+  var autumn = [];
+  var spring = [];
+  var summer = [];
+  var container = [];
+  for (let i = 0; i < data.length; i++) {
+    value = Object.values(data[i]);
+    autumn.push(value[0]);
+    spring.push(value[1]);
+    summer.push(value[2]);
+  }
+  container.push(autumn);
+  container.push(spring);
+  container.push(summer);
+  return container;
+}
+
+function generateMajorGraph(yearList, major_name) {
+  var newcontainer = [];
+  var majorContainer = []; //store major name for specific school
+  for (let i = 0; i < yearList.length; i++) {
+    var yearContainer = []; //sperate object by each year
+    for (let j = 0; j < dataLength; j++) {
+      if (data[j].Year == yearList[i] && data[j].School == major_name) {
+        yearContainer.push(data[j]);
+        majorContainer.push(data[j].Major);
+      }
+    }
+    newcontainer.push(yearContainer);
+  }
+  majorContainer = majorContainer.filter(
+    (item, i, ar) => ar.indexOf(item) === i
+  );
+  var result = majorDistribution(newcontainer, majorContainer);
+  showMajorChart(yearList, result, majorContainer);
+}
+function majorDistribution(majorList, majorName) {
+  //create dictionary
+  dict = createDict(majorName);
+
+  yearContainer = [];
+  for (let i = 0; i < majorList.length; i++) {
+    for (let j = 0; j < dict.length; j++) {
+      for (let k = 0; k < majorList[i].length; k++) {
+        if (majorList[i][k].Major == dict[j].major) {
+          dict[j].Student += majorList[i][k].Students;
+        }
+      }
+    }
+    yearContainer.push(dict);
+    dict = createDict(majorName);
+  }
+  return yearContainer;
+}
+
+function createDict(name) {
+  localDict = [];
+  for (let i = 0; i < name.length; i++) {
+    localDict.push({
+      major: name[i],
+      Student: 0
+    });
+  }
+  return localDict;
+}
+function showMajorChart(year, data, name) {
+  var ctx1 = $("#majorChart");
+
+  data = convertToArray(data, name.length);
+  container = [];
+  for (var i = 0; i < data.length; i++) {
+    color =
+      "#" +
+      Math.random()
+        .toString(16)
+        .substr(-6); //generate random color
+    dataset = {};
+    dataset.label = name[i];
+    dataset.data = data[i];
+    dataset.backgroundColor = color;
+    dataset.borderColor = color;
+    dataset.borderWidth = [1, 1, 1, 1, 1];
+    container.push(dataset);
+  }
+  //pie chart
+  var data1 = {
+    labels: year,
+    datasets: container
+  };
+  //options
+  var options = {
+    responsive: true,
+    title: {
+      display: true,
+      position: "top",
+      text: "No. of Student",
+      fontSize: 18,
+      fontColor: "#111"
+    },
+    legend: {
+      display: true,
+      position: "bottom",
+      labels: {
+        fontColor: "#333",
+        fontSize: 16
+      }
+    }
+  };
+  //create Chart class object
+  var chart1 = new Chart(ctx1, {
+    type: "bar",
+    data: data1,
+    options: options
+  });
+}
+function convertToArray(data, length) {
+  //create array
+  var container = [];
+  for (let i = 0; i < length; i++) {
+    var iContainer = [];
+    container.push(iContainer);
+  }
+
+  for (let i = 0; i < data.length; i++) {
+    for (let j = 0; j < data[i].length; j++) {
+      container[j].push(data[i][j].Student);
+    }
+  }
+  return container;
 }

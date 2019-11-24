@@ -130,6 +130,10 @@
           <div class="pie-chart-container">
             <canvas id="yearChart"></canvas>
           </div>
+          <div class="form-group">
+            <label for="comment">Comment:</label>
+            <textarea class="form-control" rows="5" id="yearComment"></textarea>
+          </div>
 
           <!--School wise distribution-->
           <div class="mb-3 border-bottom">
@@ -153,14 +157,15 @@
                   <label for="exampleFormControlSelect1">Year Span</label>
                   <select class="form-control" id="yearSpan">
                     <option disabled selected>Select Year Span</option>
-                    <option>Last 1 year</option>
-                    <option>Last 2 year</option>
-                    <option>Last 3 year</option>
+                    <option>Last 1 Year</option>
+                    <option>Last 2 Year</option>
+                    <option>Last 3 Year</option>
                   </select>
                 </div>
                 <div class="col-sm">
                   <button
                     style="margin-top: 30px;"
+                    id="schoolSubmit"
                     type="button"
                     class="btn btn-primary"
                   >
@@ -170,6 +175,18 @@
               </div>
             </div>
           </form>
+          <div class="pie-chart-container">
+            <canvas id="SchoolChart"></canvas>
+          </div>
+          <div class="form-group">
+            <label for="comment">Comment:</label>
+            <textarea
+              class="form-control"
+              rows="5"
+              id="schoolComment"
+            ></textarea>
+          </div>
+
           <!--Major Wise distribution-->
           <div class="mb-3 border-bottom">
             <h1 class="h2">Majorwise Distribution</h1>
@@ -180,7 +197,7 @@
                 <div class="col-sm">
                   <label for="exampleFormControlSelect1">Major Name</label>
                   <select class="form-control" id="majorName">
-                    <option disabled selected>Select Major</option>
+                    <option disabled selected>Select School Name</option>
                     <!--
                     <option>Autumn(Fall)</option>
                     <option>Spring</option>
@@ -190,17 +207,18 @@
                 </div>
                 <div class="col-sm">
                   <label for="exampleFormControlSelect1">Year Span</label>
-                  <select class="form-control" id="exampleFormControlSelect1">
+                  <select class="form-control" id="majorYearSpan">
                     <option disabled selected>Select Year Span</option>
-                    <option>Last 1 year</option>
-                    <option>Last 2 year</option>
-                    <option>Last 3 year</option>
+                    <option>Last 1 Year</option>
+                    <option>Last 2 Year</option>
+                    <option>Last 3 Year</option>
                   </select>
                 </div>
                 <div class="col-sm">
                   <button
                     style="margin-top: 30px;"
-                    type="submit"
+                    id="majorSubmit"
+                    type="button"
                     class="btn btn-primary"
                   >
                     Submit
@@ -209,6 +227,25 @@
               </div>
             </div>
           </form>
+          <div class="pie-chart-container">
+            <canvas id="majorChart"></canvas>
+          </div>
+          <div class="form-group">
+            <label for="comment">Comment:</label>
+            <textarea
+              class="form-control"
+              rows="5"
+              id="majorComment"
+            ></textarea>
+            <button
+              style="margin-top: 30px;"
+              id="generateReport"
+              type="button"
+              class="btn btn-primary"
+            >
+              Submit
+            </button>
+          </div>
         </main>
       </div>
     </div>
