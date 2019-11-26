@@ -47,4 +47,4 @@ make change **admin.js**,**login.js**,**operator.js** file (most of the code are
 2. database update after each new entry from the data entry operator is not done
 3. Data operator entry is not connected with the database (make change to **routers/operator.js** file)
 
-**NB: This project was build on tight schedule so i apologies for my untidy code,I will add comment in the future**
+**NB: This project was build on tight schedule so i apologies for my untidy code,In the futue i will add comment and refactor this project**
