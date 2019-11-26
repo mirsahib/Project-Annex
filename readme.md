@@ -1,3 +1,8 @@
+## System Description
+
+This application will generate visual representation of semester wise student enrollment, and categorize it by the school and majors. It will have options to compare results with others semesters from previous semesters and give us a numeric comparison, which will help the university officials to make decisions.
+The application will collect data given by the University. Adding the data in our application will add all the students in our database. By sorting and categorizing the students we can generate statistical data with any other activity.
+
 ## How to run this project in your local computer
 
 **Step:1**
