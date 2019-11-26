@@ -44,7 +44,7 @@ make change **admin.js**,**login.js**,**operator.js** file (most of the code are
 
 To change the design
 go to public/css folder to change the frontend design
-or public/img to make change to login page (**login_cover** very important)
+or public/img to make change to login page (**login_cover.jpg** very important)
 
 ## Issues
 
