@@ -12,6 +12,24 @@ var majorChart;
 var yearChart;
 var schoolChart;
 $(document).ready(function() {
+  //load dataset
+  if (localStorage.length == 0) {
+    $.ajax({
+      type: "GET",
+      //data: { get_param: "value" },
+      url: "/operator/data",
+      dataType: "json", // <-- add this
+      success: function(data) {
+        localStorage.setItem("admission", JSON.stringify(data));
+        console.log("database stored in local storage");
+      },
+      error: function(data) {
+        //console.log("error");
+        console.log(data);
+      }
+    });
+  }
+
   schoolName = getSchoolName();
   //majorName = getMajorName();
   //populate school name
@@ -96,8 +114,13 @@ $(document).ready(function() {
     var pdf = new jsPDF("l", "pt", [reportPageWidth, reportPageHeight]);
     pdf.addImage($(pdfCanvas)[0], "PNG", reportPageWidth / 2, 0);
 
+    var time = new Date();
+    var date = time.getDate();
+    var month = time.getMonth();
+    var min = time.getMinutes();
+    var hour = time.getHours();
     // download the pdf
-    pdf.save("filename.pdf");
+    pdf.save(min + "_" + hour + "_" + date + "_" + month + ".pdf");
   });
 });
 function getSchoolName() {
