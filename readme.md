@@ -1,4 +1,4 @@
-## how to run this project in you local computer
+## How to run this project in you local computer
 
 **Step:1**
 install node js
