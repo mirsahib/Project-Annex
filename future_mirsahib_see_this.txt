@@ -1,0 +1,9 @@
+
+var semester = {}
+var list = ["autumn","spring","summer"]
+
+for(let i =0;i<list.length;i++){
+  semester[list[i]] = ""
+}
+
+console.log(semester)
