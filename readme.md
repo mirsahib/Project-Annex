@@ -37,9 +37,14 @@ run the project(in nodemon)
 
 ## If you want to make any change to this project
 
+To change the code
 go to public/js folder
 
 make change **admin.js**,**login.js**,**operator.js** file (most of the code are written there)
+
+To change the design
+go to public/css folder to change the frontend design
+or public/img to make change to login page (**login_cover** very important)
 
 ## Issues
 
