@@ -60,4 +60,4 @@ or public/img to make change to login page (**login_cover.jpg** very important)
 **NB: This project was build on tight schedule so i apologies for my untidy code,In the future i will add comment and refactor this project**
 
 #### Day 1 fix
-[Sql query added:](https://github.com/mirsahib/Project-Annex/blob/master/sql_query.txt)
+[Sql query added](https://github.com/mirsahib/Project-Annex/blob/master/sql_query.txt)
