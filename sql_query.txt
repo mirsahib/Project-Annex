@@ -1,0 +1,44 @@
+---sql Query---
+***Semester wise***
+Select Year,Semester,Sum(Students) from admissions where Year>endYear and Year<strYear Group By Year,Semester
+***School wise***
+Select Year,School,Sum(Students) from admissions where Year>endYear and Year<strYear Group By Year,School
+***Major Wise ***
+SELECT Year,Major,SUM(Students) from admissions where School="SchoolName" and (Year>2013 and Year<2018) GROUP BY Year,Major
+
+
+
+---NoSql Query---
+***Semester wise***
+db.admissions.group({
+	key:{Year:1,Semester:1},
+	cond:{Year:{$gte:strYear,$lte:endYear}},
+	reduce:function(curr,result){
+		result.total += curr.Students	
+	},
+	initial:{total:0}
+})
+
+***School wise***
+db.admissions.group({
+	key:{Year:1,School:1},
+	cond:{Year:{$gte:strYear,$lte:endYear}},
+	reduce:function(curr,result){
+		result.total += curr.Students	
+	},
+	initial:{total:0}
+})
+
+
+***Major Wise ***
+db.admissions.group({
+	key:{Year:1,School:1},
+	cond:{Year:{$gte:strYear,$lte:endYear},School:"SchoolName"},
+	reduce:function(curr,result){
+		result.total += curr.Students	
+	},
+	initial:{total:0}
+})
+
+NB: endYear,strYear,SchoolName is variable(change them accordingly)
+
