@@ -57,4 +57,7 @@ or public/img to make change to login page (**login_cover.jpg** very important)
 2. database update after each new entry from the data entry operator is not done
 3. Data operator entry is not connected with the database (make change to **routers/operator.js** file)
 
-**NB: This project was build on tight schedule so i apologies for my untidy code,In the futue i will add comment and refactor this project**
+**NB: This project was build on tight schedule so i apologies for my untidy code,In the future i will add comment and refactor this project**
+
+## Day 1 fix
+[Sql query added:](https://github.com/mirsahib/Project-Annex/blob/master/sql_query.txt)
