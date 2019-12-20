@@ -8,8 +8,6 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico" />
-
     <title>Admin</title>
     <link
       rel="icon"
@@ -69,7 +67,7 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="mb-3 border-bottom">
-            <h1 class="h2">YearWise Distribution</h1>
+            <h1 class="h2">Semester Wise Distribution</h1>
           </div>
 
           <!--<div
@@ -91,24 +89,27 @@
             <div class="container">
               <div class="row">
                 <div class="col-sm">
-                  <label for="exampleFormControlSelect1">Year</label>
-                  <select class="form-control" id="yearSelect">
+                  <label for="exampleFormControlSelect1">Start Year</label>
+                  <select class="form-control" id="strYear_sem">
                     <option value="null" disabled selected>Select Year</option>
-                    <option>2019</option>
-                    <option>2018</option>
-                    <option>2017</option>
+                    <option>2014</option>
+                    <option>2015</option>
                     <option>2016</option>
+                    <option>2017</option>
+                    <option>2018</option>
+                    <option>2019</option>
                   </select>
                 </div>
                 <div class="col-sm">
-                  <label for="exampleFormControlSelect1">Semester Name</label>
-                  <select class="form-control" id="semesterSelect">
-                    <option value="null" disabled selected
-                      >Select Semester</option
-                    >
-                    <option>Autumn</option>
-                    <option>Spring</option>
-                    <option>Summer</option>
+                  <label for="exampleFormControlSelect1">End Year</label>
+                  <select class="form-control" id="endYear_sem">
+                    <option value="null" disabled selected>Select Year</option>
+                    <option>2014</option>
+                    <option>2015</option>
+                    <option>2016</option>
+                    <option>2017</option>
+                    <option>2018</option>
+                    <option>2019</option>
                   </select>
                 </div>
                 <!--<button type="submit"> will refresh the page
@@ -116,7 +117,7 @@
                 -->
                 <div class="col-sm">
                   <button
-                    id="yearSubmit"
+                    id="semSubmit"
                     style="margin-top: 30px;"
                     type="button"
                     class="btn btn-primary"
@@ -133,29 +134,33 @@
 
           <!--School wise distribution-->
           <div class="mb-3 border-bottom">
-            <h1 class="h2">Schoolwise Distribution</h1>
+            <h1 class="h2">School Wise Distribution</h1>
           </div>
           <form>
             <div class="container">
               <div class="row">
                 <div class="col-sm">
-                  <label for="exampleFormControlSelect1">School Name</label>
-                  <select class="form-control" id="schoolName">
-                    <option disabled selected>Select School Name</option>
-                    <!--
-                    <option>Autumn(Fall)</option>
-                    <option>Spring</option>
-                    <option>Summer</option>
-                    -->
+                  <label for="exampleFormControlSelect1">Start Year</label>
+                  <select class="form-control" id="strYear_school">
+                    <option value="null" disabled selected>Select Year</option>
+                    <option>2014</option>
+                    <option>2015</option>
+                    <option>2016</option>
+                    <option>2017</option>
+                    <option>2018</option>
+                    <option>2019</option>
                   </select>
                 </div>
                 <div class="col-sm">
-                  <label for="exampleFormControlSelect1">Year Span</label>
-                  <select class="form-control" id="yearSpan">
-                    <option disabled selected>Select Year Span</option>
-                    <option>Last 1 Year</option>
-                    <option>Last 2 Year</option>
-                    <option>Last 3 Year</option>
+                  <label for="exampleFormControlSelect1">End Year</label>
+                  <select class="form-control" id="endYear_school">
+                    <option value="null" disabled selected>Select Year</option>
+                    <option>2014</option>
+                    <option>2015</option>
+                    <option>2016</option>
+                    <option>2017</option>
+                    <option>2018</option>
+                    <option>2019</option>
                   </select>
                 </div>
                 <div class="col-sm">
@@ -177,29 +182,46 @@
 
           <!--Major Wise distribution-->
           <div class="mb-3 border-bottom">
-            <h1 class="h2">Majorwise Distribution</h1>
+            <h1 class="h2">Major Wise Distribution</h1>
           </div>
           <form>
             <div class="container">
               <div class="row">
                 <div class="col-sm">
-                  <label for="exampleFormControlSelect1">Major Name</label>
-                  <select class="form-control" id="majorName">
-                    <option disabled selected>Select School Name</option>
-                    <!--
-                    <option>Autumn(Fall)</option>
-                    <option>Spring</option>
-                    <option>Summer</option>
-                    -->
+                  <label for="exampleFormControlSelect1">Start Year</label>
+                  <select class="form-control" id="strYear_major">
+                    <option value="null" disabled selected>Select Year</option>
+                    <option>2014</option>
+                    <option>2015</option>
+                    <option>2016</option>
+                    <option>2017</option>
+                    <option>2018</option>
+                    <option>2019</option>
                   </select>
                 </div>
                 <div class="col-sm">
                   <label for="exampleFormControlSelect1">Year Span</label>
-                  <select class="form-control" id="majorYearSpan">
-                    <option disabled selected>Select Year Span</option>
-                    <option>Last 1 Year</option>
-                    <option>Last 2 Year</option>
-                    <option>Last 3 Year</option>
+                  <select class="form-control" id="endYear_major">
+                    <option value="null" disabled selected>Select Year</option>
+                    <option>2014</option>
+                    <option>2015</option>
+                    <option>2016</option>
+                    <option>2017</option>
+                    <option>2018</option>
+                    <option>2019</option>
+                  </select>
+                </div>
+                <div class="col-sm">
+                  <label for="exampleFormControlSelect1">School</label>
+                  <select class="form-control" id="slt_school">
+                    <option value="null" disabled selected
+                      >Select School</option
+                    >
+                    <option>SoB</option>
+                    <option>SLS</option>
+                    <option>SLASS</option>
+                    <option>SESM</option>
+                    <option>SECS</option>
                   </select>
                 </div>
                 <div class="col-sm">
@@ -242,10 +264,11 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
       crossorigin="anonymous"
     ></script>
+
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <!-- Icons -->

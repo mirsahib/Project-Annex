@@ -42,3 +42,32 @@ db.admissions.group({
 
 NB: endYear,strYear,SchoolName is variable(change them accordingly)
 
+--- Query using aggregate function---
+***Semester wise***
+[
+    {
+      $match: {
+        Year: {
+          $gte: str,
+          $lt: end
+        }
+      }
+    },
+    {
+      $group: {
+        _id: {
+          Year: "$Year",
+          Semester: "$Semester"
+        },
+        total: {
+          $sum: "$Students"
+        }
+      }
+    },
+    {
+      $sort: {
+        _id: -1
+      }
+    }
+  ];
+***School wise ***
